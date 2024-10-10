@@ -35,6 +35,14 @@ possible using the getFIA function. They use the example of:
 
 getFIA(states = 'AZ', tables = c('TREE', 'PLOT'))
 
+Without setting options(timeout=3600), data would not be able to download completely in 60 seconds. If downloading using getFIA 
+is continuing to give you trouble you can download the data by pasting the URL "https://apps.fs.usda.gov/fia/datamart/CSV/AZ_CSV.zip" 
+into the search bar and downloading directly from datamart. This will download as a zipped file with many tables and you can use the
+read_csv function to read the data in. 
+
+library(tidyverse)
+az_tree <- read_csv(paste0(getwd(), "/AZ_CSV/AZ_TREE.csv"))
+
 **Compute Estimates of Forest Variable**
 Now we can explore the basic functionality of rFIA with the tpa function. This function is used to compute tree abundance
 estimates (trees per acre (TPA), basal area per acre (BAA), & relative abundance). 

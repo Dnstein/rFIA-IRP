@@ -33,7 +33,7 @@ plotFIA(az)
 #Subsetting for the most recent AZ data. Is it set to true by default (?)
 azMR <- clipFIA(az, mostRecent = TRUE)
 #get tree abundance estimates for most recent year of data
-tpa_azMR <- tpa(az)
+tpa_azMR <- tpa(azMR)
 head(tpa_azMR)
 
 #get tree abundance estimates for all az all inventory years
@@ -50,8 +50,8 @@ head(tpaaz_sizeClass, n = 5)
 
 # Group by species and size class, and plot the distribution for the most recent inventory year
 tpaaz_spsc <- tpa(azMR, bySpecies = TRUE, bySizeClass = TRUE)
-plotFIA(tpaaz_spsc, BAA, grp = COMMON_NAME, x = sizeClass,
-        plot.title = 'Size-class distributions of BAA by species', 
+plotFIA(tpaaz_spsc, TPA, grp = COMMON_NAME, x = sizeClass,
+        plot.title = 'Size-class distributions of TPA by species', 
         x.lab = 'Size Class (inches)', text.size = .75,
         n.max = 5) # Only want the top 5 species, try n.max = -5 for bottom 5
 
@@ -72,8 +72,8 @@ az_counties <- st_read("~/Desktop/rFIA-IRP/data/arizona_counties")
 ## returnSpatial = TRUE indicates that the resulting estimates will be joined with the 
 ##    polygons we specified, thus allowing us to visualize the estimates across space
 tpaaz_counties <- tpa(azMR, polys = az_counties, returnSpatial = TRUE)
-#plot basal area per acre f
-plotFIA(tpaaz_counties, BAA)
+#plot basal area per acre
+plotFIA(tpaaz_counties, TPA)
 
 ## Using the full FIA dataset, all available inventories
 
@@ -81,30 +81,3 @@ tpaaz_st <- tpa(az, polys = az_counties, returnSpatial = TRUE)
 library(gganimate)
 plotFIA(tpaaz_st, TPA, animate = TRUE, legend.title = 'Abundance (TPA)',
         legend.height = .8)
-
-
-library(gganimate)
-library(ggplot2)
-library(gifski)
-
-
-
-library(sp)
-library(geodata)
-library(terra)
-
-#Data would not load this way. I pasted the URL "https://apps.fs.usda.gov/fia/datamart/CSV/AZ_CSV.zip" into my search bar and downloaded
-#the data from there. It downloaded as a zipped file with many data tables.
-library(tidyverse)
-getwd()
-az_tree <- read_csv(paste0(getwd(), "/AZ_CSV/AZ_TREE.csv"))
-
-azMR$TREE
-names(az)
-
-
-# UUID to generate unique ID numbers. 
-library(uuid)
-UUIDgenerate()
-
-
