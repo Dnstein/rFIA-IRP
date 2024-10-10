@@ -11,6 +11,7 @@ in the Departments of FOrestry and Geography. It was originally published to the
 removed and archived in 2023 while issues are being addressed. 
 
 **Installation**
+
 Because the rFIA package has been removed from CRAN for the time being you will need to install
 the development version from GitHub. But first you need to load the 'devtools' and 'usethis' packages
 
@@ -19,6 +20,7 @@ library(devtools)
 devtools::install_github('hunter-stanke/rFIA', force = TRUE)
 
 **Downloading Data**
+
 It is recommended to download the data you are interested in using in subsets. Forest Inventory and Analysis (FIA) 
 data is downloaded from the FIA DataMart which is a huge dataset that is continously being updated with new data. Therefore,
 when downloading large datasets could max out your RAM and you may want to consider saving to a disk.
@@ -44,6 +46,7 @@ library(tidyverse)
 az_tree <- read_csv(paste0(getwd(), "/AZ_CSV/AZ_TREE.csv"))
 
 **Compute Estimates of Forest Variable**
+
 Now we can explore the basic functionality of rFIA with the tpa function. This function is used to compute tree abundance
 estimates (trees per acre (TPA), basal area per acre (BAA), & relative abundance). 
 
@@ -66,6 +69,7 @@ or by size class:
 tpaaz_sizeClass <- tpa(azMR, bySizeClass = TRUE)
 
 **Plot the distribution**
+
 We can plot the TPA for the most recent year by species and size class using the plotFIA function:
 
 tpaaz_spsc <- tpa(azMR, bySpecies = TRUE, bySizeClass = TRUE)
@@ -75,6 +79,7 @@ plotFIA(tpaaz_spsc, TPA, grp = COMMON_NAME, x = sizeClass,
         n.max = 5) # Only want the top 5 species, try n.max = -5 for bottom 5
 
 **TPA estimates within population boundaries**
+
 We can load shape file data for our population boundaries and plot TPA. I downloaded the 'Arizona
 County Boundaries' shapefiles from AZGeo Data hub
 (https://azgeo-open-data-agic.hub.arcgis.com/datasets/545fc0393f0747cb9665848a75f9b23c_0/explore)
